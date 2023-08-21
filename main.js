@@ -21,16 +21,20 @@ QUANDO L'UTENTE CLICCA SU OGNI CELLA,LA CELLA CLICCATA SI COLORA DI AZZURO
  b)usiamo il console.log sull'indice associato alla cella
 
 */
-
+// DICHIARAZIONI
 const button = document.getElementById('pulsante')
 const grid = document.getElementById('griglia')
+let choise = document.getElementById('select') // variabile legata al menu a tendina della difficolta
 
 button.addEventListener('click', function () {
-    generaGriglia()
+    const mode = choise.value; // modalita scelta dal menu a tendina
+    const numberOfSquare = regulationGrid(mode) //richiamo la funzione per dare il numero di elementi della grid
+    generaGriglia(numberOfSquare);
     
 })
- function generaGriglia(){
-    for (let index = 1; index <=100; index++){
+ function generaGriglia(totalSquares){
+    grid.innerHTML = '';
+    for (let index = 1; index <= totalSquares; index++){
         // creamo una cella
         const cell = document.createElement('div')
         cell.classList.add('cell')
@@ -48,3 +52,15 @@ button.addEventListener('click', function () {
 
  }
 
+ // Creo funzione che in base alla scelta dell'utente mi cambia anche il numero degli elementi della grid
+ function regulationGrid(modeUser){
+     numberOfSquare = 0;
+     if (modeUser === 'easy'){
+        numberOfSquare = 100;
+     } else if (modeUser === 'medium'){
+        numberOfSquare = 81;
+     } else if (modeUser === 'hard'){
+        numberOfSquare = 49;
+     }
+     return numberOfSquare;
+ }
